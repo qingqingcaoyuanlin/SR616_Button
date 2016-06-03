@@ -4,15 +4,17 @@
 #include <QtSerialPort/qserialport.h>
 class Serial : public QThread
 {
+    Q_OBJECT
 public:
-    Serial();
-    ~Serial();
     QSerialPort serialPort;
     QString PortName;
     QString BaudRate;
     QByteArray Data_Tx;
+    QByteArray Data_Rx;
 protected:
     void run();
+signals:
+    void signal_printf();
 };
 
 #endif // SERIAL_H

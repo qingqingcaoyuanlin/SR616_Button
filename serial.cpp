@@ -1,14 +1,6 @@
 #include "serial.h"
-
-Serial::Serial()
-{
-
-}
-
-Serial::~Serial()
-{
-
-}
+#include "mainwindow.h"
+#include <QDebug>
 
 void Serial::run()
 {
@@ -16,8 +8,21 @@ void Serial::run()
     {
         while(serialPort.isOpen())
         {
-            serialPort.
 
+            Data_Rx = serialPort.readAll();
+            if(Data_Rx.length() > 0)
+            {
+                qDebug()<<"recv";
+                emit signal_printf();
+            }
+            /*
+            if(Data_Tx.length() > 0)
+            {
+                serialPort.write((char *)&Data_Tx, Data_Tx.length());
+                Data_Tx.clear();
+            }
+            */
+            usleep(1000);
         }
         sleep(1);
     }
